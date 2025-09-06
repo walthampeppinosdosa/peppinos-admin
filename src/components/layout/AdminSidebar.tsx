@@ -89,7 +89,7 @@ export const AdminSidebar: React.FC = () => {
   const getNavCls = ({ isActive }: { isActive: boolean }) =>
     isActive 
       ? "bg-primary text-primary-foreground font-medium shadow-warm" 
-      : "hover:bg-accent hover:text-accent-foreground";
+      : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground";
 
   const canAccessRoute = (item: NavItem) => {
     if (!item.roles) return true;
@@ -101,23 +101,23 @@ export const AdminSidebar: React.FC = () => {
 
   return (
     <Sidebar className={isCollapsed ? "w-14" : "w-64"} collapsible="icon">
-      <SidebarContent className="bg-card border-r">
-        <div className="p-6 border-b">
+      <SidebarContent className="bg-sidebar border-r border-sidebar-border">
+        <div className="p-6 border-b border-sidebar-border">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <Utensils className="h-5 w-5 text-primary-foreground" />
             </div>
             {!isCollapsed && (
               <div>
-                <h2 className="font-bold text-foreground">FoodAdmin</h2>
-                <p className="text-xs text-muted-foreground">Restaurant Management</p>
+                <h2 className="font-bold text-sidebar-foreground">FoodAdmin</h2>
+                <p className="text-xs text-sidebar-foreground/60">Restaurant Management</p>
               </div>
             )}
           </div>
         </div>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sidebar-foreground/70">Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {filteredNavItems.map((item) => (
@@ -136,12 +136,12 @@ export const AdminSidebar: React.FC = () => {
 
         {user?.role !== 'super_admin' && (
           <SidebarGroup>
-            <SidebarGroupLabel>Quick Access</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-sidebar-foreground/70">Quick Access</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <NavLink to="/products/new" className="text-muted-foreground hover:text-foreground">
+                    <NavLink to="/products/new" className="text-sidebar-foreground/60 hover:text-sidebar-foreground">
                       <Package className="mr-3 h-4 w-4" />
                       {!isCollapsed && <span>Add Product</span>}
                     </NavLink>
@@ -149,7 +149,7 @@ export const AdminSidebar: React.FC = () => {
                 </SidebarMenuItem>
                 {user?.role === 'veg_admin' && (
                   <SidebarMenuItem>
-                    <SidebarMenuButton className="text-success hover:text-success">
+                    <SidebarMenuButton className="text-success hover:text-success/80">
                       <Leaf className="mr-3 h-4 w-4" />
                       {!isCollapsed && <span>Veg Products</span>}
                     </SidebarMenuButton>
